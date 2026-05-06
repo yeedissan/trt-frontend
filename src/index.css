@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   BASE GLOBALE
+───────────────────────────────────────── */
+
+body {
+  background-color: #F8F9FA;
+}
+
+/* ─────────────────────────────────────────
+   DARK MODE — CSS overrides globaux
+───────────────────────────────────────── */
+
+.dark body                           { background-color: #111827; color: #f3f4f6; }
+
+/* Surfaces */
+.dark .bg-white                      { background-color: #1f2937 !important; }
+.dark .bg-gray-50                    { background-color: #111827 !important; }
+
+/* Bordures */
+.dark .border-gray-100               { border-color: #374151 !important; }
+.dark .border-gray-200               { border-color: #374151 !important; }
+
+/* Textes — neutres, pas tintés vert */
+.dark .text-gray-900                 { color: #f9fafb !important; }
+.dark .text-gray-800                 { color: #f3f4f6 !important; }
+.dark .text-gray-700                 { color: #e5e7eb !important; }
+.dark .text-gray-600                 { color: #d1d5db !important; }
+.dark .text-gray-500                 { color: #9ca3af !important; }
+.dark .text-gray-400                 { color: #6b7280 !important; }
+.dark .text-gray-300                 { color: #4b5563 !important; }
+
+/* Tableaux — override direct sur les éléments pour couvrir les classes arbitraires */
+.dark tbody tr                       { background-color: #1f2937 !important; }
+.dark tbody tr:nth-child(even)       { background-color: #18202d !important; }
+.dark tbody tr:hover                 { background-color: #1e1b4b !important; }
+.dark .divide-gray-50 > *            { border-color: #374151 !important; }
+
+/* Inputs */
+.dark input, .dark select, .dark textarea {
+  background-color: #374151 !important;
+  color: #f3f4f6 !important;
+  border-color: #4b5563 !important;
+}
+.dark input::placeholder             { color: #6b7280 !important; }
+.dark input:focus, .dark select:focus, .dark textarea:focus {
+  background-color: #374151 !important;
+}
+
+/* Hover boutons / liens */
+.dark .hover\:bg-gray-50:hover       { background-color: #374151 !important; }
+.dark .hover\:bg-gray-100:hover      { background-color: #4b5563 !important; }
+
+/* Modales */
+.dark .bg-white.rounded-xl           { background-color: #1f2937 !important; }
+.dark .bg-white.rounded-2xl          { background-color: #1f2937 !important; }
+
+/* Fond de page */
+.dark .bg-\[#F8F9FA\]               { background-color: #18202d !important; }
+
+/* Skeleton */
+.dark .animate-pulse                 { background-color: #374151 !important; }
+
+/* Scrollbar */
+.dark ::-webkit-scrollbar            { background-color: #111827; }
+.dark ::-webkit-scrollbar-thumb      { background-color: #374151; border-radius: 4px; }
+
+/* ─────────────────────────────────────────
+   IMPRESSION — @media print
+───────────────────────────────────────── */
+
+@media print {
+  aside, nav, .no-print, button:not(.print-only) {
+    display: none !important;
+  }
+
+  body, main, .flex-1 {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-header {
+    display: block !important;
+    border-bottom: 2px solid #4338ca;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 11px !important;
+  }
+
+  th, td {
+    border: 1px solid #d1d5db !important;
+    padding: 6px 10px !important;
+    text-align: left !important;
+  }
+
+  thead {
+    background-color: #ede9fe !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .rounded-xl, .rounded-2xl, .rounded-lg {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0 !important;
+  }
+
+  .pagination, [class*="Pagination"] {
+    display: none !important;
+  }
+
+  tr { page-break-inside: avoid; }
+}
