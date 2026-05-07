@@ -8,7 +8,7 @@ import Layout from '../components/layout/Layout'
 import { PageLoader } from '../components/ui/Skeleton'
 import anneeService from '../services/anneeService'
 
-const EMPTY_FORM = { libelle: '', date_debut: '', date_fin: '' }
+const EMPTY_FORM = { date_debut: '', date_fin: '' }
 
 const fmt = (d) => d ? new Date(d).toLocaleDateString('fr-FR') : '—'
 
@@ -54,16 +54,14 @@ export default function Annees() {
   const fermer = () => { setShowModal(false); setForm(EMPTY_FORM); setErrors({}) }
 
   const valider = (f) => {
-    const e = {}
-    if (!f.libelle.trim()) e.libelle    = 'Requis (ex: 2025-2026)'
-    if (!f.date_debut)     e.date_debut = 'Requis'
-    if (!f.date_fin)       e.date_fin   = 'Requis'
-    else if (f.date_debut && f.date_fin <= f.date_debut)
-      e.date_fin = 'Doit être après la date de début'
-    setErrors(e)
-    return Object.keys(e).length === 0
-  }
-
+  const e = {}
+  if (!f.date_debut) e.date_debut = 'Requis'
+  if (!f.date_fin)   e.date_fin   = 'Requis'
+  else if (f.date_debut && f.date_fin <= f.date_debut)
+    e.date_fin = 'Doit être après la date de début'
+  setErrors(e)
+  return Object.keys(e).length === 0
+}
   const handleSubmit = (ev) => {
     ev.preventDefault()
     if (!valider(form)) return
@@ -187,14 +185,7 @@ export default function Annees() {
                 <button onClick={fermer} className="text-gray-400 hover:text-gray-600"><X size={16} /></button>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Libellé (ex: 2025-2026)</label>
-                  <input type="text" placeholder="2025-2026"
-                    value={form.libelle}
-                    onChange={(e) => setForm((p) => ({ ...p, libelle: e.target.value }))}
-                    className={inputCls(errors.libelle)} />
-                  {errors.libelle && <p className="text-[11px] text-red-500 mt-0.5">{errors.libelle}</p>}
-                </div>
+               
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">Date de début</label>
                   <input type="date"
